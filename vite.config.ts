@@ -1,8 +1,12 @@
 import { defineConfig, normalizePath } from 'vite';
 import viteEslint from 'vite-plugin-eslint';
+import svgr from 'vite-plugin-svgr';
 import autoprefixer from 'autoprefixer';
 import viteStylelint from 'vite-plugin-stylelint';
 import react from '@vitejs/plugin-react';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import { visualizer } from 'rollup-plugin-visualizer';
+import legacy from '@vitejs/plugin-legacy';
 import path from 'path';
 
 // 全局 scss 文件的路径
@@ -11,14 +15,32 @@ const variablePath = normalizePath(
   path.resolve('./src/assets/styles/variable.scss')
 );
 
+// 是否为生产环境，在生产环境一般会注入 NODE_ENV 这个环境变量，见下面的环境变量文件配置
+const isProduction = process.env.NODE_ENV === 'production';
+const CDN_URL = '/';
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: isProduction ? CDN_URL : '/',
   plugins: [
     react(),
     viteEslint(),
     viteStylelint({
       // 对某些文件排除检查
       exclude: ['windicss', 'node_modules']
+    }),
+    svgr(),
+    createSvgIconsPlugin({
+      iconDirs: [path.join(__dirname, 'src/assets/icons')],
+      symbolId: 'menu_icon_[name]'
+    }),
+    legacy({
+      // 设置目标浏览器，browserslist 配置语法
+      targets: ['ie >= 11']
+    }),
+    // 产物分析
+    visualizer({
+      open: false
     })
   ],
   css: {
@@ -52,10 +74,26 @@ export default defineConfig({
       ]
     }
   },
+  build: {
+    // 单文件或者内联，小于8KB转换成base64
+    assetsInlineLimit: 8 * 1024,
+    target: ['es2015'],
+    rollupOptions: {
+      output: {
+        // manualChunks 配置
+        manualChunks: {
+          // 将 React等第三方库 相关库打包成单独的 chunk 中
+          'react-vendor': ['react', 'react-dom']
+          // 'antd-vendor': ['antd']
+        }
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'), // 路径重命名
       '@assets': path.join(__dirname, 'src/assets')
     }
-  }
+  },
+  assetsInclude: ['.gltf', '.ttf', 'mp4', '.mp3']
 });

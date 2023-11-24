@@ -24,6 +24,7 @@
     "@types/react-dom": "18.2.15",
     "@typescript-eslint/eslint-plugin": "6.12.0",
     "@typescript-eslint/parser": "6.12.0",
+    "@vitejs/plugin-legacy": "^5.2.0",
     "@vitejs/plugin-react": "4.2.0",
     "autoprefixer": "10.4.16",
     "commitlint": "^18.4.3",
@@ -36,6 +37,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "prettier": "3.1.0",
+    "rollup-plugin-visualizer": "^5.9.2",
     "sass": "1.69.5",
     "stylelint": "^15.11.0",
     "stylelint-config-prettier": "^9.0.5",
@@ -46,7 +48,9 @@
     "typescript": "5.2.2",
     "vite": "5.0.0",
     "vite-plugin-eslint": "^1.8.1",
-    "vite-plugin-stylelint": "^5.2.1"
+    "vite-plugin-stylelint": "^5.2.1",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-svgr": "^4.2.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,tsx,ts}": [

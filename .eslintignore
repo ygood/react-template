@@ -9,3 +9,5 @@ tsconfig.json
 .prettierrc.json
 .stylelintrc.json
 tsconfig.node.json
+dist/
+build/
