@@ -1,11 +1,13 @@
 #root {
-  max-width: 1280px;
-  padding: 2rem;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
   text-align: center;
 }
 
-.title {
-  color: $theme-color;
-  text-decoration: dashed;
+.app {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  color: black;
 }
