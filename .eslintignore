@@ -1,0 +1,11 @@
+node_modules/
+tsconfig.json
+.eslintrc.cjs
+.commitlintrc.cjs
+.prettierrc.cjs
+.stylelintrc.cjs
+.eslintrc.json
+.commitlintrc.json
+.prettierrc.json
+.stylelintrc.json
+tsconfig.node.json
