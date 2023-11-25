@@ -1,13 +1,7 @@
 import Axios from 'axios';
 
-let apiUrl = import.meta.env.VITE_APP_PROXY_URL as string;
-
-if (!apiUrl?.endsWith('/')) {
-  apiUrl += '/';
-}
-
 const axios = Axios.create({
-  baseURL: apiUrl,
+  baseURL: '/',
   timeout: 20000,
   headers: { 'Content-Type': 'application/json' }
 });

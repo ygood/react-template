@@ -15,6 +15,8 @@ const variablePath = normalizePath(
   path.resolve('./src/assets/styles/variable.scss')
 );
 
+// let apiUrl = import.meta.env.VITE_APP_PROXY_URL as string;
+
 // 是否为生产环境，在生产环境一般会注入 NODE_ENV 这个环境变量，见下面的环境变量文件配置
 const isProduction = process.env.NODE_ENV === 'production';
 const CDN_URL = '/';
@@ -83,8 +85,8 @@ export default defineConfig({
         // manualChunks 配置
         manualChunks: {
           // 将 React等第三方库 相关库打包成单独的 chunk 中
-          'react-vendor': ['react', 'react-dom']
-          // 'antd-vendor': ['antd']
+          'react-vendor': ['react', 'react-dom'],
+          'antd-vendor': ['antd']
         }
       }
     }
@@ -93,6 +95,14 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'), // 路径重命名
       '@assets': path.join(__dirname, 'src/assets')
+    }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://172.29.161.176:3030',
+        changeOrigin: true
+      }
     }
   },
   assetsInclude: ['.gltf', '.ttf', 'mp4', '.mp3']

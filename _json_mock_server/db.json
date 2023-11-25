@@ -1,0 +1,15 @@
+{
+  "user": {
+    "data": {
+      "account": "admin",
+      "passwd": "cfa0daf171ab12b63ed6978b539da04c",
+      "oldPasswd": "d1ea12804ad1b39456bf5d77b325d9fb",
+      "updateCycle": 0
+    }
+  },
+  "login": {
+    "data": {
+      "user": "admin"
+    }
+  }
+}

@@ -7,21 +7,27 @@
     "prepare": "husky install",
     "start": "vite --host",
     "build": "tsc && vite build",
-    "lint": "npm run lint:script && npm run lint:style",
+    "mock": "node _json_mock_server/server.js",
+    "lint": "npm run lint:script && npm run lint:style && npm run prettier",
     "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix --quiet ./src",
     "lint:style": "stylelint --fix \"src/**/*.{css,scss}\"",
+    "prettier": "prettier src/ --write",
     "preview": "vite preview --host"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "antd": "5.11.3",
     "axios": "1.6.2",
+    "crypto-js": "^4.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.20.0"
+    "react-router-dom": "6.20.0",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
+    "@types/crypto-js": "^4.2.1",
     "@types/node": "20.9.4",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
@@ -38,6 +44,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-react-refresh": "0.4.4",
     "husky": "^8.0.3",
+    "json-server": "^0.17.4",
     "lint-staged": "^15.1.0",
     "prettier": "3.1.0",
     "rollup-plugin-visualizer": "^5.9.2",

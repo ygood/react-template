@@ -42,4 +42,24 @@ const http = async (
   }
 };
 
+export const useHttp = () => {
+  return (...[endpoint, config]: Parameters<typeof http>) => {
+    return http(endpoint, { ...config });
+  };
+};
+
+export const useHttpPost = () => {
+  return (...[endpoint, config]: Parameters<typeof http>) => {
+    return http(endpoint, { ...config, method: 'POST' });
+  };
+};
+
+export const DownloadCfg = (param?: Partial<any>) => {
+  const client = useHttp();
+  return client('api/system/downloadCfg', {
+    data: param || {},
+    responseType: 'arraybuffer'
+  });
+};
+
 export default http;
