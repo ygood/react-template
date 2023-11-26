@@ -3,6 +3,7 @@ import { useCallback, useContext, useMemo } from 'react';
 import earthPng from '@assets/image/earth.png';
 import { languageContext } from '@/context';
 import { languages } from '@/language';
+import './_style.scss';
 
 const { Option } = Select;
 

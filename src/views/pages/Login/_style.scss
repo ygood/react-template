@@ -1,4 +1,109 @@
-.title {
-  color: $theme-color;
-  text-decoration: dashed;
+.login-wapper {
+  background-repeat: no-repeat !important;
+  background-image: url('@assets/image/background.png') !important;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+
+  .login-language-wapper {
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 1vw 5vw 0;
+  }
+
+  .login-background {
+    display: flex;
+    height: 90vh;
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .login-div {
+      background-color: rgb(241 246 255 / 70%);
+      border-radius: 30px;
+      width: 800px;
+      height: 500px;
+      display: flex;
+      flex-direction: row;
+
+      .welcome-wapper {
+        width: 50%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .welcome-title {
+          margin-bottom: 0;
+          color: #fff;
+          font-weight: 700;
+          font-size: 45px;
+          -webkit-text-stroke: 1px #428bfd;
+          text-shadow: 0 7px 10px #428bfd;
+          -webkit-text-fill-color: #fff;
+        }
+
+        .back-img-wapper {
+          width: 300px;
+          height: 300px;
+        }
+      }
+
+      .login-form {
+        width: 50%;
+        backdrop-filter: blur(10px);
+        padding: 10px 36px;
+        background-color: white;
+        box-shadow: 0 0 20px #428bfd;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .logo {
+          width: 100%;
+          display: flex;
+          margin-top: 35px;
+          justify-content: center;
+
+          .logo-img {
+            margin: auto;
+            line-height: 100px;
+            display: flex;
+
+            img {
+              margin: auto;
+              width: 120px;
+              height: 100px;
+            }
+          }
+        }
+
+        .login-text {
+          margin-top: 60px;
+          width: 100%;
+
+          .ant-form-item {
+            margin-bottom: 35px;
+          }
+
+          .ant-form {
+            margin: 0;
+            padding: 0;
+            color: rgba(0 0 0 / 85%);
+            font-size: 14px;
+            font-variant: tabular-nums;
+            line-height: 1.5715;
+            list-style: none;
+            font-feature-settings: 'tnum';
+          }
+        }
+      }
+    }
+  }
 }

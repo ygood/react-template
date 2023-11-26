@@ -15,7 +15,7 @@ const Login: FC<any> = () => {
       <div className="login-language-wapper">
         <LanguageSellect />
       </div>
-      <div className="LoginBackground">
+      <div className="login-background">
         <div className="login-div">
           <div className="welcome-wapper">
             <h1 className="welcome-title">{langs?.welcome}</h1>
@@ -27,7 +27,7 @@ const Login: FC<any> = () => {
                 <img src={LogoPng} alt="" />
               </div>
             </div>
-            <div className="LoginText">
+            <div className="login-text">
               <Form
                 name="basic"
                 onFinish={onFinish}
@@ -43,7 +43,6 @@ const Login: FC<any> = () => {
                   ]}
                 >
                   <Input
-                    disabled
                     size="large"
                     style={{ borderRadius: '10px', width: '100%' }}
                     placeholder={langs.comUsername}
