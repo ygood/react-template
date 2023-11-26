@@ -12,8 +12,12 @@ export const routes: RouterINTF[] = [
     children: [
       {
         path: '',
+        redirect: 'home'
+      },
+      {
+        path: 'home',
         key: 'home',
-        title: 'home',
+        title: '_home',
         meta: {
           authentication: false
         },
@@ -22,7 +26,7 @@ export const routes: RouterINTF[] = [
       {
         path: 'network',
         key: 'network',
-        title: 'network',
+        title: '_network',
         meta: {
           authentication: false
         },
@@ -31,7 +35,7 @@ export const routes: RouterINTF[] = [
       {
         path: 'advance',
         key: 'advance',
-        title: 'advance',
+        title: '_advance',
         meta: {
           authentication: false
         },

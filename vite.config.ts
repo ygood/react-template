@@ -1,4 +1,4 @@
-import { defineConfig, normalizePath } from 'vite';
+import { defineConfig, normalizePath, loadEnv } from 'vite';
 import viteEslint from 'vite-plugin-eslint';
 import svgr from 'vite-plugin-svgr';
 import autoprefixer from 'autoprefixer';
@@ -15,11 +15,14 @@ const variablePath = normalizePath(
   path.resolve('./src/assets/styles/variable.scss')
 );
 
-// let apiUrl = import.meta.env.VITE_APP_PROXY_URL as string;
-
 // 是否为生产环境，在生产环境一般会注入 NODE_ENV 这个环境变量，见下面的环境变量文件配置
 const isProduction = process.env.NODE_ENV === 'production';
+
+// CDN地址
 const CDN_URL = '/';
+
+// 获取当前环境的vite环境变量
+const env = loadEnv(process.env.NODE_ENV, __dirname);
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -100,7 +103,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://172.29.161.176:3030',
+        target: env.VITE_APP_PROXY_URL,
         changeOrigin: true
       }
     }

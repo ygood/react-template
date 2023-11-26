@@ -9,7 +9,8 @@
   },
   "login": {
     "data": {
-      "user": "admin"
+      "userName": "admin",
+      "password": "d0b3a79e80cb012612d292a9d2f6713ff25e0ddfd1688709c413fef3c4ebd2cc"
     }
   }
 }

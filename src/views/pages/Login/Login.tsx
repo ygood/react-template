@@ -34,7 +34,6 @@ const Login: FC<any> = () => {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
                 labelWrap
-                initialValues={{ userName: 'admin', password: '' }}
               >
                 <Form.Item
                   name="userName"

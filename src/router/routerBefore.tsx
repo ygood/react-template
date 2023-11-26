@@ -6,7 +6,7 @@ import React from 'react';
 
 // 拦截
 const RouterBeforeEach = (props: { route: RouterINTF; children: any }) => {
-  const isLogin = getLoginStatus() === 'true';
+  const isLogin = Boolean(getLoginStatus());
   if (props?.route?.meta?.authentication) {
     if (!isLogin) {
       return <Navigate to={'/login'} replace />;
@@ -22,8 +22,8 @@ const RouterBeforeEach = (props: { route: RouterINTF; children: any }) => {
 };
 
 // 渲染路由
-const renderRoutes = (cuoutes: RouterINTF[]) => {
-  return cuoutes.map((item: RouterINTF) => {
+const renderRoutes = (croutes: RouterINTF[]) => {
+  return croutes.map((item: RouterINTF) => {
     const route: any = { meta: item.meta, path: item.path };
     if (item.component) {
       // element 要接收react.element类型 item.component 是对象要转一下
