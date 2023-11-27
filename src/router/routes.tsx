@@ -1,6 +1,7 @@
 import { RouterINTF } from '@/entity/RouterINTF';
 import { lazy } from 'react';
 import { networkMenus, advanceMenus } from './modules';
+import { GlobalOutlined, GoldOutlined, HomeOutlined } from '@ant-design/icons';
 
 export const routes: RouterINTF[] = [
   {
@@ -18,8 +19,9 @@ export const routes: RouterINTF[] = [
         path: 'home',
         key: 'home',
         title: '_home',
+        icon: <HomeOutlined />,
         meta: {
-          authentication: false
+          authentication: true
         },
         component: lazy(() => import('@/views/pages/Home'))
       },
@@ -27,8 +29,9 @@ export const routes: RouterINTF[] = [
         path: 'network',
         key: 'network',
         title: '_network',
+        icon: <GlobalOutlined />,
         meta: {
-          authentication: false
+          authentication: true
         },
         children: [...networkMenus]
       },
@@ -36,8 +39,9 @@ export const routes: RouterINTF[] = [
         path: 'advance',
         key: 'advance',
         title: '_advance',
+        icon: <GoldOutlined />,
         meta: {
-          authentication: false
+          authentication: true
         },
         children: [...advanceMenus]
       }

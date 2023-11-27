@@ -1,8 +1,8 @@
 import { Layout, Menu } from 'antd';
 import { routes } from '@/router/routes';
-import { useContext, useMemo, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { MenuINF } from '@/entity/MenuINF';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { languageContext } from '@/context';
 
 const { Sider } = Layout;
@@ -11,8 +11,9 @@ const McaLayoutSide = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { langs } = useContext(languageContext);
   const location = useLocation();
-  const curActiveMenu = useRef('');
+  const [curActiveMenu, setCurActiveMenu] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   // 菜单
   const menus = useMemo(() => {
@@ -21,32 +22,24 @@ const McaLayoutSide = () => {
     }
     const menuArr: MenuINF[] = [];
     for (const el of routes[0].children) {
-      if (!el.key && !el.title) {
+      if (!el.path && !el.title) {
         continue;
       }
       const menu: MenuINF = {
-        key: `${el.key}`,
-        icon: null,
-        label: el.children ? (
-          langs[el.title || ''] ? (
-            langs[el.title || '']
-          ) : (
-            el.title
-          )
-        ) : (
-          <Link to={`${el.path}`}>
-            {langs[el.title || ''] ? langs[el.title || ''] : el.title}
-          </Link>
-        )
+        key: `/${el.path}`,
+        icon: el?.icon,
+        label: langs[el.title || ''] ? langs[el.title || ''] : el.title
       };
       if (el.children && el.children.length > 0) {
         const children: MenuINF[] = [];
         el.children.forEach((child) => {
-          if (child.key) {
+          if (child.path) {
             children.push({
-              key: child.key,
-              icon: null,
-              label: <Link to={`${el.path}/${child.path}`}>{child.title}</Link>
+              key: `/${el.path}/${child.path}`,
+              icon: child.icon,
+              label: langs[child.title || '']
+                ? langs[child.title || '']
+                : child.title
             });
           }
         });
@@ -57,10 +50,10 @@ const McaLayoutSide = () => {
     return menuArr;
   }, [langs]);
 
-  const currentMenu = useMemo(() => {
-    let path = location.pathname.split('/').pop() || 'home';
-    if (path === curActiveMenu.current) {
-      return path;
+  useEffect(() => {
+    let path = location.pathname;
+    if (path === curActiveMenu[0]) {
+      return;
     }
     setOpenKeys([]);
     const flag = menus.some((el) => {
@@ -73,11 +66,15 @@ const McaLayoutSide = () => {
       }
     });
     if (!flag) {
-      path = 'home';
+      path = '/home';
     }
-    curActiveMenu.current = path;
-    return path;
-  }, [location, menus]);
+    setCurActiveMenu([path]);
+  }, [curActiveMenu, location.pathname, menus]);
+
+  const menuClick = (item: any) => {
+    navigate(item.key, { replace: true });
+    setCurActiveMenu([item.key]);
+  };
 
   const onOpenChange = (keys: string[]) => {
     setOpenKeys(keys);
@@ -97,7 +94,8 @@ const McaLayoutSide = () => {
         items={menus}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
-        selectedKeys={[currentMenu]}
+        selectedKeys={curActiveMenu}
+        onClick={menuClick}
       />
     </Sider>
   );
